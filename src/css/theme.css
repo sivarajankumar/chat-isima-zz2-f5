@@ -1,0 +1,81 @@
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+#welcomePart
+{
+	position: absolute;
+	top: 40%;
+	width: 60%;
+	text-align: center;
+	font-size: 200%;
+}
+
+#connectFormPart
+{
+	position: absolute;
+	top: 40%;
+	left: 60%;
+}
+
+h1
+{
+	color: #800000;
+}
+
+.blueTitle
+{
+	color: #00C;
+	font-size: 150%;
+	margin-bottom: 20px;
+}
+
+.leftPart
+{
+	float: left;
+}
+
+#nicknameInput
+{
+	width: 98%;
+}
+
+#connectFormCheckbox
+{
+	margin-right: 10px;
+	margin-top: 8px;
+}
+
+input
+{
+	margin-bottom: 10px;
+}
+
+.errorField
+{
+	display: block;
+	color: red;
+	margin-bottom: 5px;
+}
+
+button
+{
+	background: #0066FF;
+	color: #FFF;
+	border-radius: 3px;
+	padding: 6px 16px;
+	border: 1px solid #0C6EBE;
+}
+
+button:hover
+{
+	background: #30496E;
+}
+
+button:disabled
+{
+	background: #AAAAAE;
+	border: 1px solid black;
+}
