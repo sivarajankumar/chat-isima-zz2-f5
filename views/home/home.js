@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 angular.module('chatApp.home', ['ngRoute'])
 
@@ -31,7 +31,7 @@ angular.module('chatApp.home', ['ngRoute'])
 		{
 		};
 		
-		// mise � jour de l'affichage
+		// mise à jour de l'affichage
 		var usersTimer = setInterval(usersOnline, 10000);
 		var messagesTimer = setInterval(getMessages, 5000);
 		
