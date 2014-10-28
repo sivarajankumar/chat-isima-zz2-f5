@@ -22,7 +22,7 @@ angular.module('chatApp.connectForm', ['ngRoute'])
 .controller
 (
 	'connectController', 
-	function($scope, $http, $compile, $location)
+	function($scope, $http, $location)
 	{
 		// connectFormData : blank object to hold information of connectForm.html
 		// $scope will allow this to pass between controller and view

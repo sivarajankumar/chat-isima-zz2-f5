@@ -24,3 +24,8 @@ function getCookie(cname)
 	
 	return "";
 }
+
+function deleteCookie(cname)
+{
+	setCookie(name, "", -1);
+}
