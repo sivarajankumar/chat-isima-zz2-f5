@@ -21,8 +21,47 @@ angular.module('chatApp.home', ['ngRoute'])
 .controller
 (
 	'homeController',
-	function($scope, $http)
+	function($scope, $http, $location)
 	{
+		// on verifie si on a une session ouverte sinon on retourne a l'accueil
+		$http
+		(
+			{
+				method	: 'POST',
+				url		: 'php/getSession.php',
+				headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+			}
+		)
+		.success
+		(
+			function(data) 
+			{
+				if( data == "" )
+				{
+					$location.path("/connectForm");
+				}
+				else
+				{
+					console.log("data : " + data);
+				}
+			}
+		);
+	
+		// deconnexion
+		$scope.disconnect = function()
+		{
+			$http
+			(
+				{
+					method	: 'POST',
+					url		: 'php/deleteSession.php',
+					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+				}
+			);
+			deleteCookie("nickname");
+			$location.path("/connectForm");
+		};
+
 		function usersOnline()
 		{
 		};

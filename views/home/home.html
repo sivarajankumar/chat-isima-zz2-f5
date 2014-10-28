@@ -1,4 +1,6 @@
-﻿<div id="usersPart">
+﻿<button ng-click="disconnect()">Se déconnecter</button>
+
+<div id="usersPart">
 	<h2>Utilisateurs connectés :</h2>
 	
 	<ul style="list-style-type:none">
@@ -19,4 +21,8 @@
 		<textarea placeholder="votre message"></textarea>
 		<button>Envoyer</button>
 	</div>
+</div>
+
+<div id="result">
+	{{ message }}
 </div>
