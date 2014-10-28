@@ -1,4 +1,4 @@
-'use strict';
+Ôªø'use strict';
 
 angular.module('chatApp.connectForm', ['ngRoute'])
 
@@ -60,7 +60,7 @@ angular.module('chatApp.connectForm', ['ngRoute'])
 					{
 						if( data.errors.nickname == 2 )
 						{
-							message = "Pseudo dÈj‡ utilisÈ";
+							message = "Pseudo d√©j√† utilis√©";
 						}
 					}
 					else
@@ -68,8 +68,8 @@ angular.module('chatApp.connectForm', ['ngRoute'])
 						if( $scope.connectFormData.rememberMe )
 						{
 							setCookie("nickname", $scope.connectFormData.nickname, 30);
-							$location.path("/home");
 						}
+						$location.path("/home");
 					}
 					
 					$( "#errorForm" ).html( message );
