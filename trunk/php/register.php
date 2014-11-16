@@ -1,5 +1,5 @@
 ﻿<?php
-	require 'nicknamesFile.php';
+	require 'usersManager.php';
 
 	session_start();
 	
@@ -22,13 +22,13 @@
 	{
 		$nickname = $_POST['nickname'];
 		
-		if( ! nicknameExists($nickname) )
+		if( ! usersExists($nickname) )
 		{
 			$rememberMe = false;
 		
 			$_SESSION['nickname'] = $nickname;
 			
-			addNickname($nickname);
+			addUsers($nickname, false);
 			
 			$data['success'] = true;
 		}

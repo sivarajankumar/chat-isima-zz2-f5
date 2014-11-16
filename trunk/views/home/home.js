@@ -27,7 +27,7 @@ angular.module('chatApp.home', ['ngRoute'])
 		$http
 		(
 			{
-				method	: 'POST',
+				method	: 'GET',
 				url		: 'php/getSession.php',
 				headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
 			}
@@ -64,12 +64,29 @@ angular.module('chatApp.home', ['ngRoute'])
 
 		function usersOnline()
 		{
+			$http
+			(
+				{
+					method	: 'GET',
+					url		: 'php/users.php',
+					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+				}
+			)
+			.success
+			(
+				function(data) 
+				{
+					console.log(data);
+					$( "#error" ).html( data );
+				}
+			);
 		};
 		
 		function getMessages()
 		{
 		};
 		
+		usersOnline();
 		// mise à jour de l'affichage
 		var usersTimer = setInterval(usersOnline, 10000);
 		var messagesTimer = setInterval(getMessages, 5000);
