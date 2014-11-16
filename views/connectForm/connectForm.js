@@ -53,7 +53,7 @@ angular.module('chatApp.connectForm', ['ngRoute'])
 				function(data) 
 				{
 					console.log(data);
-					
+					$( "#error" ).html(data);
 					var message = "";
 					
 					if( ! data.success )
