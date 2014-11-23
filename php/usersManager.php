@@ -50,6 +50,10 @@ function removeUsers($nickname)
 			if( $item->nickname == $nickname )
 			{
 				unset($json->users[$i]);
+				
+				// rebase the array
+				$json->users = array_values($json->users);
+				
 				file_put_contents($fileName, json_encode($json));
 				return;
 			}
