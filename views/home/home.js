@@ -46,6 +46,9 @@ angular.module('chatApp.home', ['ngRoute'])
 				}
 			}
 		);
+		
+		var usersTimer;
+		var messagesTimer;
 	
 		// deconnexion
 		$scope.disconnect = function()
@@ -59,6 +62,10 @@ angular.module('chatApp.home', ['ngRoute'])
 				}
 			);
 			deleteCookie("nickname");
+			
+			clearInterval(usersTimer);
+			clearInterval(messagesTimer);
+			
 			$location.path("/connectForm");
 		};
 
@@ -86,10 +93,12 @@ angular.module('chatApp.home', ['ngRoute'])
 		{
 		};
 		
+		getMessages();
 		usersOnline();
+		
 		// mise à jour de l'affichage
-		var usersTimer = setInterval(usersOnline, 10000);
-		var messagesTimer = setInterval(getMessages, 5000);
+		usersTimer = setInterval(usersOnline, 10000);
+		messagesTimer = setInterval(getMessages, 5000);
 		
 		// envoie de message
 		
