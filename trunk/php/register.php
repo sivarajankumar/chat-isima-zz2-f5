@@ -24,11 +24,18 @@
 		
 		if( ! usersExists($nickname) )
 		{
-			$rememberMe = false;
+			if( ! isset($_POST['rememberMe']) || empty($_POST['rememberMe']) )
+			{
+				$rememberMe = false;
+			}
+			else
+			{
+				$rememberMe = $_POST['rememberMe'];
+			}
 		
 			$_SESSION['nickname'] = $nickname;
 			
-			addUsers($nickname, false);
+			addUsers($nickname, $rememberMe);
 			
 			$data['success'] = true;
 		}
