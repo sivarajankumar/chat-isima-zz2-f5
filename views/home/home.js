@@ -66,6 +66,31 @@ angular.module('chatApp.home', ['ngRoute'])
 		{
 		};
 		
+		//envoi de message
+		$scope.sendMessage = function()
+		{
+			//alert("Les temps ont changés");
+			$http
+			(
+				{
+					method	: 'POST',
+					url		: 'php/messages.php',
+					data    : $.param($scope.messageData),
+					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+				}
+			)
+			.success
+			(
+				function(data) 
+				{
+					console.log(data.message);
+					//$scope.newMessage = response.data;
+					//console.log($scope.newMessage);
+					
+				}
+			);
+		};
+		
 		function getMessages()
 		{
 		};
