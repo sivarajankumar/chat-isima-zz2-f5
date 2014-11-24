@@ -1,0 +1,38 @@
+﻿<div id="welcomePart">
+	
+	<h1>Chat Isima</h1>
+	<h2>Développé par Benoit Jougla</h2>
+	
+</div>
+
+<div id="connectFormPart">
+	
+	<form name="connectForm">
+		
+			<div class="blueTitle">Se connecter</div>
+			<div id="errorForm" class="errorField"></div>
+			
+			<div>
+				<span class="errorField" ng-show="connectForm.nickname.$error.required && !connectForm.nickname.$pristine">
+					Saisissez votre pseudo
+				</span>
+				<input type="text" id="nicknameInput" name="nickname" ng-model="connectFormData.nickname" placeholder="pseudo" required>
+			</div>
+			
+			<div>
+				<div class="leftPart" id="connectFormCheckbox">
+					<input type="checkbox" ng-model="connectFormData.rememberMe">
+					<span>Rester connecté</span>
+				</div>
+				
+				<button ng-click="connect()" ng-disabled="connectForm.$invalid">Se connecter</button>
+			</div>
+	</form>
+	
+</div>
+<div id="error"></div>
+
+<div id="result">
+	{{ connectFormData }}
+	{{ message }}
+</div>

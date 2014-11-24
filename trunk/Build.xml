@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Ant-ChatISIMA" default="prepare">
+	<!-- Remplacer le prepare par le build qui contient toutes les tâches -->
+	
+	<property file="build.properties"/>
+	
+	<target name="clean"
+			unless="clean.done"
+			description="Cleanup build artifacts">
+		<delete dir="${basedir}/reports/coverage"/>
+		<delete dir="${basedir}/reports/logs"/>
+		<delete dir="${basedir}/reports/pdepend"/>
+		<delete dir="${basedir}/reports/phpdox"/>
+		<property name="clean.done" value="true"/>
+	</target>
+	
+	<target name="prepare"
+			unless="prepare.done"
+			depends="clean"
+			description="Cleanup build artifacts">
+		<mkdir dir="${basedir}/reports/coverage"/>
+		<mkdir dir="${basedir}/reports/logs"/>
+		<mkdir dir="${basedir}/reports/pdepend"/>
+		<mkdir dir="${basedir}/reports/phpdox"/>
+		<property name="prepare.done" value="true"/>
+	</target>
+
+</project>
