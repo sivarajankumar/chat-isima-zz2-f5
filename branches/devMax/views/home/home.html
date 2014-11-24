@@ -18,8 +18,11 @@
 	</div>
 	
 	<div id="sendMessages">
-		<textarea placeholder="votre message"></textarea>
-		<button>Envoyer</button>
+		<form ng-submit="sendMessage()">
+		
+			<textarea ng-model="messageData.message" placeholder="votre message"></textarea>
+			<button>Envoyer</button>
+		</form>
 	</div>
 </div>
 

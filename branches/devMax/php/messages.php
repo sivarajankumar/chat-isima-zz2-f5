@@ -11,4 +11,7 @@
 		echo 'COOKIE coucou ' . $_COOKIE['nickname'];
 	}
 
+	$data[success] = true;
+	$data[message] = utf8_encode("les temps ont changes");
+	echo json_encode($data);
 ?>
