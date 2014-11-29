@@ -53,6 +53,9 @@ angular.module('chatApp.home', ['ngRoute'])
 		// deconnexion
 		$scope.disconnect = function()
 		{
+			clearInterval(usersTimer);
+			clearInterval(messagesTimer);
+			
 			$http
 			(
 				{
@@ -61,10 +64,9 @@ angular.module('chatApp.home', ['ngRoute'])
 					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
 				}
 			);
-			deleteCookie("nickname");
 			
-			clearInterval(usersTimer);
-			clearInterval(messagesTimer);
+			deleteCookie("nickname");
+			deleteCookie("password");
 			
 			$location.path("/connectForm");
 		};

@@ -8,7 +8,7 @@ function getUsersFilePath()
 	return $config_array["usersFilePath"];
 }
 
-function addUsers($nickname, $rememberMe)
+function addUsers($nickname, $password)
 {
 	// Définit le fuseau horaire par défaut à utiliser.
 	date_default_timezone_set('UTC');
@@ -20,7 +20,7 @@ function addUsers($nickname, $rememberMe)
 		// Create or read file $fileName
 		$file = fopen($fileName, 'c');
 		
-		$username[] = array('nickname' => $nickname, 'rememberMe' => $rememberMe, 'date' => date("Y-m-d H:i:s"));
+		$username[] = array('nickname' => $nickname, 'password' => $password, 'date' => date("Y-m-d H:i:s"));
 		$data['users'] = $username;
 		
 		fwrite($file, json_encode($data));
@@ -30,7 +30,7 @@ function addUsers($nickname, $rememberMe)
 	{
 		$json = json_decode(file_get_contents($fileName), true);
 		
-		array_push($json['users'], array('nickname' => $nickname, 'rememberMe' => $rememberMe, 'date' => date("Y-m-d H:i:s")));
+		array_push($json['users'], array('nickname' => $nickname, 'password' => $password, 'date' => date("Y-m-d H:i:s")));
 		
 		file_put_contents($fileName, json_encode($json));
 	}
@@ -75,6 +75,29 @@ function usersExists($nickname)
 			if( $item->nickname == $nickname )
 			{
 				return true;
+			}
+		}
+	}
+	
+	return false;
+}
+
+function verifyPassword($nickname, $password)
+{
+	$fileName = getUsersFilePath();
+	
+	if( file_exists($fileName) )
+	{
+		$json = json_decode(file_get_contents($fileName));
+	
+		foreach( $json->users as $item )
+		{
+			if( $item->nickname == $nickname )
+			{
+				if( $item->password == $password )
+					return true;
+				else
+					return false;
 			}
 		}
 	}

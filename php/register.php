@@ -30,7 +30,9 @@
 			}
 			else
 			{
-				$rememberMe = $_POST['rememberMe'];
+				$password = password_hash($nickname, PASSWORD_DEFAULT);
+				$rememberMe = $password;
+				$data['password'] = $password;
 			}
 		
 			$_SESSION['nickname'] = $nickname;
@@ -41,12 +43,29 @@
 		}
 		else
 		{
-			$data['success'] = false;
-			$data['errors'] = array('nickname' => 2);
+			if( isset($_POST['password']) && ! empty($_POST['password']) )
+			{
+				
+				if( verifyPassword($nickname, $_POST['password']) )
+				{
+					$data['success'] = true;
+					$data['password'] = $_POST['password'];
+					
+					$_SESSION['nickname'] = $nickname;
+				}
+				else 
+				{
+					$data['success'] = false;
+				}
+			}
+			else
+			{
+				$data['success'] = false;
+				$data['errors'] = array('nickname' => 2);
+			}
 		}
 	}
 
 	// return all our data to an AJAX call
 	echo json_encode($data);
-
 ?>

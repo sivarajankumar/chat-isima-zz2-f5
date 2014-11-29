@@ -48,6 +48,7 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services'])
 					if( $scope.connectFormData.rememberMe )
 					{
 						setCookie("nickname", $scope.connectFormData.nickname, 30);
+						setCookie("password", data.password, 30);
 					}
 					$location.path("/home");
 				}
@@ -74,11 +75,17 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services'])
 				}
 				else
 				{
-					var cookie = getCookie("nickname");
-					if( cookie != "" )
+					var nicknameCookie = getCookie("nickname");
+					var passwordCookie = getCookie("password");
+					
+					if( nicknameCookie != "" && passwordCookie != "" )
 					{
-						deleteCookie("nickname");
-						var array = { nickname:cookie, rememberMe:true };
+						$scope.connectFormData.nickname = nicknameCookie;
+						console.log("connexioon");
+						$scope.connectFormData.rememberMe = true;
+
+						var array = { nickname:nicknameCookie, password:passwordCookie };
+						console.log(array);
 						connection( array );
 					}
 				}
