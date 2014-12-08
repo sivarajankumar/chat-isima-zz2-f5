@@ -10,10 +10,9 @@ function getUsersFilePath()
 
 function addUsers($nickname, $password)
 {
-	// DÃ©finit le fuseau horaire par dÃ©faut Ã  utiliser.
+	// Définit le fuseau horaire par défaut à utiliser.
 	date_default_timezone_set('UTC');
 	$fileName = getUsersFilePath();
-	
 	
 	if( ! file_exists($fileName) )
 	{
