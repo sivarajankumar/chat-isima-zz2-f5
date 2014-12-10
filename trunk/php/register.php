@@ -3,26 +3,26 @@
 
 	session_start();
 	
+	// Set the HTTP header to UTF-8 and Json data
 	header('Content-type: application/json; charset=UTF-8');
 	
 	$errors	= array();	// array to hold validation errors
 	$data	= array();	// array to pass back data
 	
+	$usersManager = new UsersManager( getUsersFilePath() );
+	
+	// If no data are send, we return an error
 	if( ! isset($_POST['nickname']) || empty($_POST['nickname']) )
 	{
-		$errors['nickname'] = 1;	
-	}
-
-	if( ! empty($errors) )
-	{
 		$data['success'] = false;
-		$data['errors'] = $errors;
+		$errors['nickname'] = 1;	
 	}
 	else
 	{
 		$nickname = $_POST['nickname'];
 		
-		if( ! usersExists($nickname) )
+		// add new user
+		if( ! $usersManager->usersExists($nickname) )
 		{
 			if( ! isset($_POST['rememberMe']) || empty($_POST['rememberMe']) )
 			{
@@ -37,16 +37,17 @@
 		
 			$_SESSION['nickname'] = $nickname;
 			
-			addUsers($nickname, $rememberMe);
+			$usersManager->addUsers($nickname, $rememberMe);
 			
 			$data['success'] = true;
 		}
+		// reconnection
 		else
 		{
 			if( isset($_POST['password']) && ! empty($_POST['password']) )
 			{
 				
-				if( verifyPassword($nickname, $_POST['password']) )
+				if( $usersManager->verifyPassword($nickname, $_POST['password']) )
 				{
 					$data['success'] = true;
 					$data['password'] = $_POST['password'];

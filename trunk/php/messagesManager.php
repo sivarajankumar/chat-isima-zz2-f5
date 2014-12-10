@@ -37,4 +37,17 @@ function addMessage($owner, $receiver, $message)
 	}
 }
 
+function removeMessage($nickname)
+{
+	$fileName = getMessagesFilePath();
+
+	if( file_exists($fileName) )
+	{
+		$json = json_decode(file_get_contents($fileName), true);
+
+		unset($json[$nickname]);
+		file_put_contents($fileName, json_encode($json));
+	}
+}
+
 ?>

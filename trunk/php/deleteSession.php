@@ -5,7 +5,8 @@
 	
 	if( isset($_SESSION['nickname']) )
 	{
-		removeUsers($_SESSION['nickname']);
+		$usersManager = new UsersManager( getUsersFilePath() );
+		$usersManager->removeUsers($_SESSION['nickname']);
 		unset($_SESSION['nickname']);
 	}
 ?>

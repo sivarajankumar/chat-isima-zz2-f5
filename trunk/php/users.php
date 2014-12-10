@@ -6,7 +6,8 @@
 	
 	if( isset($_SESSION['nickname']) )
 	{
-		echo json_encode(getAllUsers());
+		$usersManager = new UsersManager( getUsersFilePath() );
+		echo json_encode( $usersManager->getAllUsers() );
 	}
 	
 ?>
