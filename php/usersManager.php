@@ -1,5 +1,121 @@
 <?php
 
+class UsersManager
+{
+	protected $fileName;
+
+	public function __construct($fileName)
+	{
+		$this->fileName = $fileName;
+	}
+	
+	public function addUsers($nickname, $password)
+	{
+		// Définit le fuseau horaire par défaut à utiliser.
+		date_default_timezone_set('UTC');
+	
+		if( ! file_exists($this->fileName) )
+		{
+			// Create or read file $fileName
+			$file = fopen($this->fileName, 'c');
+	
+			$username[] = array('nickname' => $nickname, 'password' => $password, 'date' => date("Y-m-d H:i:s"));
+			$data['users'] = $username;
+	
+			fwrite($file, json_encode($data));
+			fclose($file);
+		}
+		else
+		{
+			$json = json_decode(file_get_contents($this->fileName), true);
+	
+			array_push($json['users'], array('nickname' => $nickname, 'password' => $password, 'date' => date("Y-m-d H:i:s")));
+	
+			file_put_contents($this->fileName, json_encode($json));
+		}
+	}
+	
+	public function removeUsers($nickname)
+	{	
+		if( file_exists($this->fileName) )
+		{
+			$json = json_decode(file_get_contents($this->fileName));
+	
+			$i = 0;
+			foreach( $json->users as $item )
+			{
+				if( $item->nickname == $nickname )
+				{
+					unset($json->users[$i]);
+	
+					// rebase the array
+					$json->users = array_values($json->users);
+	
+					file_put_contents($this->fileName, json_encode($json));
+					return;
+				}
+				++$i;
+			}
+		}
+	}
+	
+	public function usersExists($nickname)
+	{
+		if( file_exists($this->fileName) )
+		{
+			$json = json_decode(file_get_contents($this->fileName));
+	
+			foreach( $json->users as $item )
+			{
+				if( $item->nickname == $nickname )
+				{
+					return true;
+				}
+			}
+		}
+	
+		return false;
+	}
+	
+	public function verifyPassword($nickname, $password)
+	{	
+		if( file_exists($this->fileName) )
+		{
+			$json = json_decode(file_get_contents($this->fileName));
+	
+			foreach( $json->users as $item )
+			{
+				if( $item->nickname == $nickname )
+				{
+					if( $item->password == $password )
+						return true;
+					else
+						return false;
+				}
+			}
+		}
+	
+		return false;
+	}
+	
+	public function getAllUsers()
+	{
+		$usersName = array();
+		
+		if( file_exists($this->fileName) )
+		{
+			$json = json_decode(file_get_contents($this->fileName));
+	
+			foreach( $json->users as $item )
+			{
+				array_push($usersName, $item->nickname);
+			}
+		}
+	
+		return $usersName;
+	}
+}
+
 function getUsersFilePath()
 {
 	// Analyse sans sections
@@ -8,119 +124,6 @@ function getUsersFilePath()
 	return $config_array["usersFilePath"];
 }
 
-function addUsers($nickname, $password)
-{
-	// Définit le fuseau horaire par défaut à utiliser.
-	date_default_timezone_set('UTC');
-	$fileName = getUsersFilePath();
-	
-	if( ! file_exists($fileName) )
-	{
-		// Create or read file $fileName
-		$file = fopen($fileName, 'c');
-		
-		$username[] = array('nickname' => $nickname, 'password' => $password, 'date' => date("Y-m-d H:i:s"));
-		$data['users'] = $username;
-		
-		fwrite($file, json_encode($data));
-		fclose($file);
-	}
-	else
-	{
-		$json = json_decode(file_get_contents($fileName), true);
-		
-		array_push($json['users'], array('nickname' => $nickname, 'password' => $password, 'date' => date("Y-m-d H:i:s")));
-		
-		file_put_contents($fileName, json_encode($json));
-	}
-}
 
-function removeUsers($nickname)
-{
-	$fileName = getUsersFilePath();
-	
-	if( file_exists($fileName) )
-	{
-		$json = json_decode(file_get_contents($fileName));
-		
-		$i = 0;
-		foreach( $json->users as $item )
-		{
-			if( $item->nickname == $nickname )
-			{
-				unset($json->users[$i]);
-				
-				// rebase the array
-				$json->users = array_values($json->users);
-				
-				file_put_contents($fileName, json_encode($json));
-				return;
-			}
-			++$i;
-		}
-	}
-}
-
-function usersExists($nickname)
-{
-	$fileName = getUsersFilePath();
-	
-	if( file_exists($fileName) )
-	{
-		$json = json_decode(file_get_contents($fileName));
-		
-		foreach( $json->users as $item )
-		{
-			if( $item->nickname == $nickname )
-			{
-				return true;
-			}
-		}
-	}
-	
-	return false;
-}
-
-function verifyPassword($nickname, $password)
-{
-	$fileName = getUsersFilePath();
-	
-	if( file_exists($fileName) )
-	{
-		$json = json_decode(file_get_contents($fileName));
-	
-		foreach( $json->users as $item )
-		{
-			if( $item->nickname == $nickname )
-			{
-				if( $item->password == $password )
-					return true;
-				else
-					return false;
-			}
-		}
-	}
-	
-	return false;
-}
-
-function getAllUsers()
-{
-	$usersName = array();
-	
-	$fileName = getUsersFilePath();
-	
-	if( file_exists($fileName) )
-	{
-		$json = json_decode(file_get_contents($fileName));
-		
-		foreach( $json->users as $item )
-		{
-			array_push($usersName, $item->nickname);
-		}
-	}
-	
-	return $usersName;
-}
 
 ?>
