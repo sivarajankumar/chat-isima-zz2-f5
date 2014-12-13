@@ -83,7 +83,7 @@ angular.module('chatApp.home', ['ngRoute'])
 			)
 			.success
 			(
-				function(data) 
+				function(data, status, headers, config) 
 				{
 					console.log(data);
 					$( "#error" ).html( data );
@@ -94,6 +94,29 @@ angular.module('chatApp.home', ['ngRoute'])
 		function getMessages()
 		{
 		};
+		
+		$scope.formData = {}; //blank object to hold information of home.html
+		
+		$scope.sendMessage = function()
+		{
+			$http
+			(
+				{
+					method	: 'POST',
+					url		: 'php/messages.php',
+					data    : $.param($scope.formData),
+					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+				}
+			)
+			.success
+			(
+				function(data, status, headers, config) 
+				{
+					console.log(data);
+				}
+			);
+		}
+		
 		
 		getMessages();
 		usersOnline();
