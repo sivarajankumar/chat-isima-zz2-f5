@@ -99,6 +99,7 @@ angular.module('chatApp.home', ['ngRoute'])
 		
 		$scope.sendMessage = function()
 		{
+			document.getElementById('message').value=''; //the message area is set to empty when the message is sent
 			$http
 			(
 				{
@@ -112,7 +113,8 @@ angular.module('chatApp.home', ['ngRoute'])
 			(
 				function(data, status, headers, config) 
 				{
-					console.log(data);
+					console.log(data.success);
+					$scope.formData = null;
 				}
 			);
 		}
