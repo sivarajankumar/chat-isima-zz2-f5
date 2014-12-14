@@ -14,6 +14,8 @@ function addMessage($owner, $receiver, $message)
 	date_default_timezone_set('UTC');
 	$fileName = getMessagesFilePath();
 	
+	if($receiver == null) $receiver = 'chat'; //if there is no specific receiver, the receiver is the common chat
+	
 	$msg = array('owner' => $owner, 'message' => $message, 'date' => date("Y-m-d H:i:s"));
 	
 	if( ! file_exists($fileName) )
