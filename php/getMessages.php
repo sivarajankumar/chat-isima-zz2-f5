@@ -12,7 +12,7 @@
 	
 	if( isset($_SESSION['nickname']) )
 	{
-		$nickname = 'chat';
+		$nickname = 'home';
 		echo json_encode($msgManager->getMessages($nickname));
 	}
 
