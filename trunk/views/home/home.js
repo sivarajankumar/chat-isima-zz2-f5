@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('chatApp.home', ['ngRoute'])
+angular.module('chatApp.home', ['ngRoute', 'services'])
 
 .config
 (
@@ -21,74 +21,51 @@ angular.module('chatApp.home', ['ngRoute'])
 .controller
 (
 	'homeController',
-	function($scope, $http, $location)
+	function($scope, $http, $location, Ajax)
 	{
 		// on verifie si on a une session ouverte sinon on retourne a l'accueil
-		$http
-		(
+		function checkSession(data, status)
+		{
+			if( data == "" )
 			{
-				method	: 'GET',
-				url		: 'php/getSession.php',
-				headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+				$location.path("/connectForm");
 			}
-		)
-		.success
-		(
-			function(data) 
+			else
 			{
-				if( data == "" )
-				{
-					$location.path("/connectForm");
-				}
-				else
-				{
-					console.log("data : " + data);
-				}
+				console.log("data : " + data);
 			}
-		);
+		}
+		
+		Ajax.get('php/getSession.php', checkSession);
 		
 		var usersTimer;
 		var messagesTimer;
 	
+		function disconnectCallback(data, status) {}
+		
 		// deconnexion
 		$scope.disconnect = function()
 		{
 			clearInterval(usersTimer);
 			clearInterval(messagesTimer);
 			
-			$http
-			(
-				{
-					method	: 'POST',
-					url		: 'php/deleteSession.php',
-					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
-				}
-			);
+			Ajax.post('php/deleteSession.php', "", disconnectCallback);
 			
 			deleteCookie("nickname");
 			deleteCookie("password");
 			
 			$location.path("/connectForm");
 		};
+		
+		function displayUsers(data, status)
+		{
+			console.log(data);
+			$( "#error" ).html( data );
+		}
 
 		function usersOnline()
 		{
-			$http
-			(
-				{
-					method	: 'GET',
-					url		: 'php/users.php',
-					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
-				}
-			)
-			.success
-			(
-				function(data, status, headers, config) 
-				{
-					console.log(data);
-					$( "#error" ).html( data );
-				}
-			);
+			Ajax.get('php/users.php', displayUsers);
 		};
 		
 		function getMessages()
@@ -96,30 +73,7 @@ angular.module('chatApp.home', ['ngRoute'])
 		};
 		
 		$scope.formData = {}; //blank object to hold information of home.html
-		
-		$scope.sendMessage = function()
-		{
-			document.getElementById('message').value=''; //the message area is set to empty when the message is sent
-			$http
-			(
-				{
-					method	: 'POST',
-					url		: 'php/messages.php',
-					data    : $.param($scope.formData),
-					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
-				}
-			)
-			.success
-			(
-				function(data, status, headers, config) 
-				{
-					console.log(data.success);
-					$scope.formData = null;
-				}
-			);
-		}
-		
-		
+
 		getMessages();
 		usersOnline();
 		
@@ -127,8 +81,19 @@ angular.module('chatApp.home', ['ngRoute'])
 		usersTimer = setInterval(usersOnline, 10000);
 		messagesTimer = setInterval(getMessages, 5000);
 		
-		// envoie de message
+		function sendCallback(data, status)
+		{
+			console.log("Send function " + data);
+		}
 		
+		// envoie de message
+		$scope.sendMessage = function()
+		{
+			var array = { receiver:'home', message:$scope.formData.message};
+			Ajax.post('php/messages.php', array, sendCallback);
+			//the message area is set to empty when the message is sent
+			$scope.formData = {};
+		}
 	}
 )
 
