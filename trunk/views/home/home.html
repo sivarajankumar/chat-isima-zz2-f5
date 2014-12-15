@@ -16,7 +16,12 @@
 
 <div id="messagesPart">
 	<div id="messagesList">
-		
+		<h2>Messages :</h2>
+	<ul ng-repeat="msg in messageData" style="list-style-type:none">
+		<li>{{ msg.message}}</li>
+		<li>{{ msg.owner}}</li>
+		<li>{{ msg.date}}</li>
+	</ul>
 	</div>
 	
 	<form ng-submit="sendMessage()">

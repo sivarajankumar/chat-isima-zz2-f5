@@ -68,8 +68,31 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 			Ajax.get('php/users.php', displayUsers);
 		};
 		
+		$scope.messageData = {}; //blank object to get all messages
+		$scope.$on('$viewContentLoaded', getMessages());
+		
 		function getMessages()
 		{
+			$http
+			(
+				{
+					method	: 'GET',
+					url		: 'php/getMessages.php',
+					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+				}
+			)
+			.success
+			(
+				function(data, status, headers, config) 
+				{
+					console.log(data);
+					$scope.messageData = data;
+					/*angular.forEach(data,function(item) {
+						$scope.messageData.push(item);
+					});*/
+					$( "#error" ).html( data );
+				}
+			);
 		};
 		
 		$scope.formData = {}; //blank object to hold information of home.html
