@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	require 'usersManager.php';
 
 	session_start();
@@ -26,9 +26,14 @@
 		{
 			if( ! isset($_POST['rememberMe']) || empty($_POST['rememberMe']) )
 			{
-				$rememberMe = false;
+				$rememberMe = 'false';
 			}
 			else
+			{
+				$rememberMe =  $_POST['rememberMe'];
+			}
+
+			if( $rememberMe == 'true' )
 			{
 				$password = password_hash($nickname, PASSWORD_DEFAULT);
 				$rememberMe = $password;
