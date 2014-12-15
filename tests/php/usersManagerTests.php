@@ -3,18 +3,18 @@
 require_once '/../../php/usersManager.php';
 
 
-class NicknamesFileTest extends PHPUnit_Framework_TestCase
+class UsersManagerTests extends PHPUnit_Framework_TestCase
 {	
 	protected $usersManager;
 	
 	protected function setUp()
 	{
-		$this->usersManager = new UsersManager("tests/php/datas/users.json");
+		$this->usersManager = new UsersManager(__DIR__ . "/datas/users.json");
 	}
 	
 	protected function tearDown()
 	{
-		unlink("tests/php/datas/users.json");
+		unlink(__DIR__ . "/datas/users.json");
 	}
 	
 	function testAddUser()
