@@ -69,7 +69,7 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services'])
 		{
 			if( status == 200 )
 			{
-				if( data != "" )
+				if( data['nickname'] != "" )
 				{
 					$location.path("/home");
 				}
@@ -94,7 +94,7 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services'])
 		
 		
 		// Check if user have a session
-		Ajax.get('php/getSession.php', session_callback);
+		Ajax.get('php/session.php', session_callback);
 		
 		// click on submit button
 		$scope.connect = function()

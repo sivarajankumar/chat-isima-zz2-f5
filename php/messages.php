@@ -15,8 +15,6 @@
 		switch($requestMethod)
 		{
 			case 'POST' :
-				echo "Ajout message";
-				
 				if( isset($_POST['receiver']) && isset($_POST['message']) )
 				{
 					$owner		= $_SESSION['nickname'];
@@ -26,6 +24,7 @@
 					if( ! empty($owner) && ! empty($receiver) && ! empty($message) )
 					{
 						$messagesManager->addMessage($owner, $receiver, $message);
+						$data['success'] = "Message send";
 					}
 					else 
 					{
@@ -38,10 +37,19 @@
 				}
 				break;
 			case 'GET' :
-				echo "Liste des messages";
+				$messages		= array();
+				$messagesHome		= $messagesManager->getMessages('home');
+				$messagesUsers	= $messagesManager->getMessages($_SESSION['nickname']);
+				
+				if( ! empty($messagesHome) )
+					array_push($messages, $messagesHome);
+				if( !empty($messagesUsers) )
+					array_push($messages, $messagesUsers);
+				
+				$data['messages'] = $messages;
 				break;
-			case 'delete' :
-				echo "Suppression des messages";
+			default:
+				$data['error'] = "Action not supported";
 				break;
 		}
 	}

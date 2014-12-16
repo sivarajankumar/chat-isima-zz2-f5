@@ -15,42 +15,59 @@ ajax.factory
 	 			$http.get(url)
 	 			.success
 	 			(
-	 					function(data, status)
-	 					{
-	 						callback(data, status);
-	 					}
+ 					function(data, status)
+ 					{
+ 						callback(data, status);
+ 					}
 	 			)
 	 			.error
 	 			(
-	 					function(error, status)
-	 					{
-	 						callback(error, status);
-	 					}
+ 					function(error, status)
+ 					{
+ 						callback(error, status);
+ 					}
 	 			);
 	 		};
 	 		
 	 		var post = function(url, params, callback)
 	 		{
-	 			console.log("Post");
-	 			console.log(params);
 	 			$http.post(url, $.param(params))
 	 			.success
 	 			(
-	 					function(data, status)
-	 					{
-	 						callback(data, status);
-	 					}
+ 					function(data, status)
+ 					{
+ 						callback(data, status);
+ 					}
 				)
 				.error
 				(
-						function(error, status)
-						{
-							callback(error, status);
-						}
+					function(error, status)
+					{
+						callback(error, status);
+					}
 				);
 	 		};
 	 		
-	 		return{	post: post, get: get }
+	 		var erase = function(url, callback)
+	 		{
+	 			$http.delete(url)
+	 			.success
+	 			(
+ 					function(data, status)
+ 					{
+ 						callback(data, status);
+ 					}
+				)
+				.error
+				(
+					function(error, status)
+					{
+						callback(error, status);
+					}
+				);
+	 		}
+	 		
+	 		return{	post: post, get: get, delete: erase }
 	 	}
 	]
 );
