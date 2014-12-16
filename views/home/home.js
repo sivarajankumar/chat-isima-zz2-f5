@@ -73,8 +73,8 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 		
 		function displayMessages(data, status)
 		{
-			console.log(data);
-			$scope.messageData = data;
+			console.log(data['messages']['home']);
+			$scope.messageData = data['messages']['home'];
 			$( "#error" ).html( data );
 		}
 		
