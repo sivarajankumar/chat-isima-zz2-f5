@@ -6,7 +6,6 @@
 	// Set the HTTP header to UTF-8 and Json data
 	header('Content-type: application/json; charset=UTF-8');
 	
-	$errors	= array();	// array to hold validation errors
 	$data	= array();	// array to pass back data
 	
 	$usersManager = new UsersManager( getUsersFilePath() );
@@ -15,7 +14,7 @@
 	if( ! isset($_POST['nickname']) || empty($_POST['nickname']) )
 	{
 		$data['success'] = false;
-		$errors['nickname'] = 1;	
+		$data['errors'] = "Nickname field is empty";
 	}
 	else
 	{
@@ -67,7 +66,7 @@
 			else
 			{
 				$data['success'] = false;
-				$data['errors'] = array('nickname' => 2);
+				$data['errors'] = $nickname . ' already use';
 			}
 		}
 	}
