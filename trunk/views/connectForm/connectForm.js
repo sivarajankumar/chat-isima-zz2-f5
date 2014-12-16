@@ -67,6 +67,7 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services'])
 		
 		function session_callback(data, status)
 		{
+			console.log(data);
 			if( status == 200 )
 			{
 				if( data['nickname'] != "" )

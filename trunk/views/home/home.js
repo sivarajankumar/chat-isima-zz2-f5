@@ -41,7 +41,13 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 		var usersTimer;
 		var messagesTimer;
 	
-		function disconnectCallback(data, status) {}
+		function disconnectCallback(data, status) 
+		{
+			deleteCookie("nickname");
+			deleteCookie("password");
+		
+			$location.path("/connectForm");
+		}
 		
 		// deconnexion
 		$scope.disconnect = function()
@@ -50,17 +56,11 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 			clearInterval(messagesTimer);
 			
 			Ajax.delete('php/session.php', disconnectCallback);
-			
-			deleteCookie("nickname");
-			deleteCookie("password");
-			
-			$location.path("/connectForm");
 		};
 		
 		function displayUsers(data, status)
 		{
-			console.log(data);
-			$( "#error" ).html( data );
+			$scope.users = data;
 		}
 
 		function usersOnline()
@@ -94,7 +94,7 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 		
 		function sendCallback(data, status)
 		{
-			console.log("Send function " + data);
+			console.log("Send function " + data['success']);
 		}
 		
 		// envoie de message

@@ -1,6 +1,7 @@
 <?php
 
 	require 'usersManager.php';
+	require 'messagesManager.php';
 	
 	session_start();
 	
@@ -21,6 +22,10 @@
 			{
 				$usersManager = new UsersManager( getUsersFilePath() );
 				$usersManager->removeUsers($_SESSION['nickname']);
+				
+				$messagesManager = new MessagesManager( getMessagesFilePath() );
+				$messagesManager->removeMessages( $_SESSION['nickname'] );
+				
 				unset($_SESSION['nickname']);
 				$data['success'] = true;
 			}
