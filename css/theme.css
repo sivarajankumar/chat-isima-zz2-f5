@@ -40,17 +40,31 @@
 }
 
 .usersList{
-	padding-left: 10%;
+	padding-left: 2%;
 }
 
 #usersPart{
 	margin-top: 2%;
 	min-height: 400px;
 	float: right;
-	background-color: #125151;
 }
 
 #messagesPart{
+	margin-top: 2%;
+	border-radius: 0.25em;
+}
+
+#messagesPanel{
+	word-wrap: break-word;
+}
+
+#messagesList{
+	height: 100%;
+	max-height: 500px;
+	overflow: auto;
+}
+
+#sendMessages{
 	margin-top: 2%;
 	background-color: #EEE;
 	border-radius: 0.25em;

@@ -5,25 +5,33 @@
 	<button id="deconnectButton" ng-click="disconnect()">Se déconnecter</button>
 </div>
 
-<div id="usersPart">
-	<h2>Utilisateurs connectés :</h2>
-	
-	<ul class="usersList" ng-repeat="user in users">
-		<li>{{ user }}</li>
-	</ul>
-	
+<div id="usersPart" class="col-md-4">
+	<div id="usersList" class="panel panel-primary">
+		<div class="panel-heading">
+			Utilisateurs connectés :
+		</div>
+		
+		<div class="panel-body">
+			<ul class="usersList" ng-repeat="user in users">
+				<li>{{ user }}</li>
+			</ul>
+		</div>
+	</div>
 </div>
 
-<div id="messagesPart">
-	<div id="messagesList">
-		<h2>Messages :</h2>
-		<ul ng-repeat="msg in messageData" style="list-style-type:none">
-			<li>{{ msg.message }}</li>
-			<li>{{ msg.owner }}</li>
-			<li>{{ msg.date }}</li>
-		</ul>
+<div id="messagesPart" class="col-md-8">
+	<div id="messagesPanel" class="panel panel-info">
+		<div class="panel-heading"> Messages :</div>
+		<div id="messagesList" class="panel-body">
+			<ul ng-repeat="msg in messageData" style="list-style-type:none">
+				<li>{{ msg.message }}</li>
+				<li><small class="text-muted">{{ msg.owner }} | {{ msg.date }}</small></li>
+			</ul>
+		</div>
 	</div>
-	
+</div>
+
+<div id="sendingPart" class="col-md-8">
 	<form ng-submit="sendMessage()">
 		<div id="sendMessages">
 			<textarea id="message" placeholder="votre message" ng-model="formData.message"></textarea>
@@ -31,10 +39,6 @@
 		</div>
 	</form>
 </div>
-
-<pre>
-	{{ formData }}
-</pre>
 
 
 <div id="result">
