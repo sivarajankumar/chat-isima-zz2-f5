@@ -20,6 +20,42 @@
 	left: 60%;
 }
 
+#bandeau {
+	width:100%;
+	height:80px;
+	background-color:#00CCFF;
+	}
+
+#chatTitle{
+	color: #000000;
+	margin-top:20px;
+	margin-left:25px;
+	float:left;
+}
+	
+#deconnectButton{
+	margin-top:25px;
+	margin-right:25px;
+	float: right;
+}
+
+.usersList{
+	padding-left: 10%;
+}
+
+#usersPart{
+	margin-top: 2%;
+	min-height: 400px;
+	float: right;
+	background-color: #125151;
+}
+
+#messagesPart{
+	margin-top: 2%;
+	background-color: #EEE;
+	border-radius: 0.25em;
+}
+
 h1
 {
 	color: #800000;

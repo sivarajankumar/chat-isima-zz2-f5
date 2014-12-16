@@ -1,11 +1,14 @@
 <div id="error"></div>
 
-<button ng-click="disconnect()">Se déconnecter</button>
+<div id="bandeau">
+	<h1 id="chatTitle">Chat ZZ</h1>
+	<button id="deconnectButton" ng-click="disconnect()">Se déconnecter</button>
+</div>
 
 <div id="usersPart">
 	<h2>Utilisateurs connectés :</h2>
 	
-	<ul ng-repeat="user in users">
+	<ul class="usersList" ng-repeat="user in users">
 		<li>{{ user }}</li>
 	</ul>
 	
