@@ -37,12 +37,9 @@
 				}
 				break;
 			case 'GET' :
-				$messages		= array();
-				$messagesHome		= $messagesManager->getMessages('home');
+				$messages['home']	= $messagesManager->getMessages('home');
 				$messagesUsers	= $messagesManager->getMessages($_SESSION['nickname']);
 				
-				if( ! empty($messagesHome) )
-					array_push($messages, $messagesHome);
 				if( !empty($messagesUsers) )
 					array_push($messages, $messagesUsers);
 				
