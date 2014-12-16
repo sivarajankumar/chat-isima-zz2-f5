@@ -26,17 +26,17 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 		// on verifie si on a une session ouverte sinon on retourne a l'accueil
 		function checkSession(data, status)
 		{
-			if( data == "" )
+			if( data['nickname'] == "" )
 			{
 				$location.path("/connectForm");
 			}
 			else
 			{
-				console.log("data : " + data);
+				console.log("Nickname : " + data['nickname']);
 			}
 		}
 		
-		Ajax.get('php/getSession.php', checkSession);
+		Ajax.get('php/session.php', checkSession);
 		
 		var usersTimer;
 		var messagesTimer;
@@ -49,7 +49,7 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 			clearInterval(usersTimer);
 			clearInterval(messagesTimer);
 			
-			Ajax.post('php/deleteSession.php', "", disconnectCallback);
+			Ajax.delete('php/session.php', disconnectCallback);
 			
 			deleteCookie("nickname");
 			deleteCookie("password");
@@ -71,28 +71,16 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 		$scope.messageData = {}; //blank object to get all messages
 		$scope.$on('$viewContentLoaded', getMessages());
 		
+		function displayMessages(data, status)
+		{
+			console.log(data);
+			$scope.messageData = data;
+			$( "#error" ).html( data );
+		}
+		
 		function getMessages()
 		{
-			$http
-			(
-				{
-					method	: 'GET',
-					url		: 'php/getMessages.php',
-					headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
-				}
-			)
-			.success
-			(
-				function(data, status, headers, config) 
-				{
-					console.log(data);
-					$scope.messageData = data;
-					/*angular.forEach(data,function(item) {
-						$scope.messageData.push(item);
-					});*/
-					$( "#error" ).html( data );
-				}
-			);
+			Ajax.get('php/messages.php', displayMessages);
 		};
 		
 		$scope.formData = {}; //blank object to hold information of home.html
