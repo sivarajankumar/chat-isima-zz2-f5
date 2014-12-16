@@ -105,6 +105,28 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 			//the message area is set to empty when the message is sent
 			$scope.formData = {};
 		}
+		
+		
+		
+		  $scope.languages = [
+			{name:'Français'},
+			{name:'English'}
+		  ];
+		  
+		setCookie("language", $scope.languages[0].name, 30);
+		
+		var languageValue = getCookie("language");		
+		  
+		  if (languageValue){
+		  
+			$scope.language = languageValue;
+			console.log(languageValue);
+			
+			}else{	  
+			
+			$scope.language = $scope.languages[0]; // Default the language to french
+			
+			}
 	}
 )
 
