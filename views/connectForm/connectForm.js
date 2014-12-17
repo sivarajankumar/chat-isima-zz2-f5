@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('chatApp.connectForm', ['ngRoute', 'services'])
+angular.module('chatApp.connectForm', ['ngRoute', 'services', 'translateModule', 'ngSanitize'])
 
 .config
 (
@@ -22,7 +22,7 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services'])
 .controller
 (
 	'connectController', 
-	function($scope, $http, $location, Ajax)
+	function($scope, $http, $location, Ajax, translationFactory)
 	{
 		// connectFormData : blank object to hold information of connectForm.html
 		// $scope will allow this to pass between controller and view
@@ -111,12 +111,13 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services'])
 		var languageValue = getCookie("language");		
 		  
 		if (languageValue){
-		  
 			$scope.language = languageValue;
+			translationFactory.getTranslation($scope, languageValue);
 		}else{	  
 			
 			$scope.language = $scope.languages[0]; // Default the language to french
 			setCookie("language", $scope.language, 30);
+			translationFactory.getTranslation($scope, getCookie("language"));
 			
 		}
 		
@@ -128,8 +129,11 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services'])
 			}
 			setCookie("language", newValue, 30);
 			console.log(getCookie("language"));
+			translationFactory.getTranslation($scope, getCookie("language"));
 		  }
 		});
+		
+		translationFactory.getTranslation($scope, getCookie("language"));
 	}
 )
 

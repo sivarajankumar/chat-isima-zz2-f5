@@ -1,0 +1,8 @@
+{  
+    "SEND" : "Send",
+    "CONNECTED_USERS" : "Online users",
+    "LOG_OUT" : "Log out",
+	"CONNECT" : "Log in",
+	"STAY" : "Stay logged in",
+	"LANGUAGE" : "Language"
+}

@@ -1,15 +1,15 @@
-<div id="error"></div>
+﻿<div id="error"></div>
 
 <div id="bandeau">
-	<h1 id="chatTitle">Chat ZZ</h1>
+	<h1 id="chatTitle">Chat Isima</h1>
 	<select id="languageSelect" ng-model="language" ng-options="l for l in languages"></select>
-	<button id="deconnectButton" ng-click="disconnect()">Se déconnecter</button>
+	<button id="deconnectButton" ng-click="disconnect()" ng-bind-html="translation.LOG_OUT"></button>
 </div>
 
 <div id="usersPart" class="col-md-4">
 	<div id="usersList" class="panel panel-primary">
 		<div class="panel-heading">
-			Utilisateurs connectés :
+			<span ng-bind-html="translation.CONNECTED_USERS"></span> :
 		</div>
 		
 		<div class="panel-body">
@@ -36,7 +36,7 @@
 	<form ng-submit="sendMessage()">
 		<div id="sendMessages">
 			<textarea id="message" placeholder="votre message" ng-model="formData.message"></textarea>
-			<button type="submit">Envoyer</button>
+			<button type="submit">{{translation.SEND}} </button>
 		</div>
 	</form>
 </div>

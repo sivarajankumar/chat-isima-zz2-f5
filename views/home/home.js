@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('chatApp.home', ['ngRoute', 'services'])
+angular.module('chatApp.home', ['ngRoute', 'services', 'translateModule', 'ngSanitize'])
 
 .config
 (
@@ -21,7 +21,7 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 .controller
 (
 	'homeController',
-	function($scope, $http, $location, Ajax)
+	function($scope, $http, $location, Ajax, translationFactory)
 	{
 		// on verifie si on a une session ouverte sinon on retourne a l'accueil
 		function checkSession(data, status)
@@ -119,11 +119,14 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 			$scope.language = languageValue;
 			console.log(languageValue);
 			console.log($scope.language);
+			translationFactory.getTranslation($scope, languageValue);
+			console.log($scope.translation);
 		}else{	  
 			
 			$scope.language = $scope.languages[0]; // Default the language to french
 			setCookie("language", $scope.language, 30);
-			
+			translationFactory.getTranslation($scope, getCookie("language"));
+			console.log($scope.translation);
 		}
 		
 		$scope.$watch('language', function(newValue, oldValue) {
@@ -134,8 +137,14 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 			}
 			setCookie("language", newValue, 30);
 			console.log(getCookie("language"));
+			translationFactory.getTranslation($scope, getCookie("language"));
+			console.log($scope.translation);
 		  }
 		});
+		
+		translationFactory.getTranslation($scope, getCookie("language"));
+		console.log($scope.translation);
+		//translationFactory($scope, getCookie("language")); 
 	}
 )
 
