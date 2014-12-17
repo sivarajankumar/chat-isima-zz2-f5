@@ -32,16 +32,11 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services', 'translateModule',
 		{
 			if( status == 200 )
 			{
-				console.log(data);
-				$( "#error" ).html(data);
 				var message = "";
 				
 				if( ! data.success )
 				{
-					if( data.errors.nickname == 2 )
-					{
-						message = "Pseudo déjà utilisé";
-					}
+					message = "Pseudo déjà utilisé";
 				}
 				else
 				{
@@ -54,8 +49,6 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services', 'translateModule',
 				}
 				
 				$( "#errorForm" ).html( message );
-				
-				$scope.message = data;
 			}
 		
 		}
@@ -67,7 +60,6 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services', 'translateModule',
 		
 		function session_callback(data, status)
 		{
-			console.log(data);
 			if( status == 200 )
 			{
 				if( data['nickname'] != "" )
@@ -82,11 +74,9 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services', 'translateModule',
 					if( nicknameCookie != "" && passwordCookie != "" )
 					{
 						$scope.connectFormData.nickname = nicknameCookie;
-						console.log("connexioon");
 						$scope.connectFormData.rememberMe = true;
 
 						var array = { nickname:nicknameCookie, password:passwordCookie };
-						console.log(array);
 						connection( array );
 					}
 				}
@@ -99,14 +89,12 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services', 'translateModule',
 		
 		// click on submit button
 		$scope.connect = function()
-		{	
-			console.log( $scope.connectFormData );
+		{
 			connection( $scope.connectFormData );
 		};
 		
 		
-		$scope.languages = ['Français',
-		  'English'];
+		$scope.languages = ['Français', 'English'];
 		
 		var languageValue = getCookie("language");		
 		  
