@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpdox xmlns="http://phpdox.net/config">
-	<project name="Chat Isima" source="../php" workdir="../build/phpdoc">
+	<project name="Chat Isima" source="${basedir}/../php" workdir="${basedir}/../build/phpdoc">
 		<collector backend="parser" />
-			<generator output="../build/phpdox">
+			<generator output="${basedir}/../build/phpdox">
 			<build engine="html" output="html"/>
 		</generator>
 	</project>
