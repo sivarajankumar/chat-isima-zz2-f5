@@ -4,6 +4,5 @@
     "LOG_OUT" : "Log out",
 	"CONNECT" : "Log in",
 	"STAY" : "Stay logged in",
-	"LANGUAGE" : "Language",
 	"POWERED" : "Powered by AngularJS"
 }
