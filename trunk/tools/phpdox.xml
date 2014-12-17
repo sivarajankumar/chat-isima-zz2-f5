@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpdox xmlns="http://phpdox.net/config">
+	<project name="Chat Isima" source="../php" workdir="../build/phpdoc">
+		<collector backend="parser" />
+			<generator output="../build/api">
+			<build engine="html" output="html"/>
+		</generator>
+	</project>
+</phpdox>
