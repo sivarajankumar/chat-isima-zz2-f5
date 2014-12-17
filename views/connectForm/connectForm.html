@@ -1,14 +1,13 @@
 ﻿<div class="row">
-	<div id="languageSelection">
-		{{translation.LANGUAGE}} :
-		<select id="languageSelect" ng-model="language" ng-options="l for l in languages"></select>
+	<div id="bandeau">
+		<select id="languageSelection" ng-model="language" ng-options="l for l in languages"></select>
 	</div>
 	
 	<div id="welcomePart" class="row col-md-6 col-md-offset-2">
 		
 		<div class="col-md-6">
 			<h1>Chat Isima</h1>
-			<h2>Powered by AngularJS</h2>
+			<h2 ng-bind-html="translation.POWERED"></h2>
 		</div>
 		
 	</div>
@@ -33,7 +32,7 @@
 						<span ng-bind-html="translation.STAY"></span>
 					</div>
 					
-					<button ng-click="connect()" ng-disabled="connectForm.$invalid">Se connecter</button>
+					<button ng-click="connect()" ng-disabled="connectForm.$invalid">{{translation.CONNECT}}</button>
 				</div>
 		</form>
 		
