@@ -72,7 +72,7 @@
 	</exec>
 </target>
 
-<target name="pdepend"
+<target name="phpdepend"
         depends="prepare"
         description="Calculate software metrics using PHP_Depend and log result in XML format. Intended for usage within a continuous integration environment.">
 	<exec executable="php ${toolsdir}/pdepend.phar">
