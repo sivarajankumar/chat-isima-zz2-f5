@@ -147,7 +147,7 @@ class UsersManager
 			foreach( $json->users as $item )
 			{
 				$date		= new DateTime( $item->date );
-				$date->modify('+10 minutes');
+				$date->modify('+10 seconde');
 				$dateToEnd	= $date->format("YmdHis");
 				$currentDate = new DateTime( date("YmdHis") );
 				$currentDate = $currentDate->format("YmdHis");
