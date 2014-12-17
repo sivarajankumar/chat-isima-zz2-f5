@@ -4,5 +4,7 @@
     "LOG_OUT" : "Se d&#233;connecter",
 	"CONNECT" : "Se connecter",
 	"STAY" : "Rester connect&#233;",
-	"POWERED" : "Propuls&#233; par AngularJS"
+	"POWERED" : "Propuls&#233; par AngularJS",
+	"ERROR_NICKNAME_REQUIRED" : "Saisissez votre pseudo",
+	"ERROR_NICKNAME_PATTERN" : "Caractére invalide. Caractères alphanumérique autorisé"
 }
