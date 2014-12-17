@@ -104,6 +104,7 @@ class UsersManager
 		{
 			$json = json_decode(file_get_contents($this->fileName));
 			
+			$i = 0;
 			foreach( $json->users as $item )
 			{
 				if( $item->nickname == $nickname )
@@ -112,14 +113,27 @@ class UsersManager
 				}
 				else
 				{
-					if( $item->password == false )
+					if( $item->password == "false" )
 					{
+						$date		= new DateTime( $item->date );
+						$date->modify('+10 minutes');
+						$dateToEnd	= $date->format("YmdHis");
+						$currentDate = new DateTime( date("YmdHis") );
+						$currentDate = $currentDate->format("YmdHis");
 						
+						if( $currentDate > $dateToEnd )
+						{
+							unset($json->users[$i]);
+						}
 					}
 				}
+				++$i;
 			}
+			
+			// rebase the array
+			$json->users = array_values($json->users);
+			file_put_contents($this->fileName, json_encode($json));
 		}
-		file_put_contents($this->fileName, json_encode($json));
 	}
 	
 	public function getAllUsers()
