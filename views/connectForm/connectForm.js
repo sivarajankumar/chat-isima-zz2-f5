@@ -103,6 +103,33 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services'])
 			console.log( $scope.connectFormData );
 			connection( $scope.connectFormData );
 		};
+		
+		
+		$scope.languages = ['Français',
+		  'English'];
+		
+		var languageValue = getCookie("language");		
+		  
+		if (languageValue){
+		  
+			$scope.language = languageValue;
+		}else{	  
+			
+			$scope.language = $scope.languages[0]; // Default the language to french
+			setCookie("language", $scope.language, 30);
+			
+		}
+		
+		$scope.$watch('language', function(newValue, oldValue) {
+		  if ( newValue !== oldValue ) {
+		  
+		    if(getCookie("language")){
+				deleteCookie("language");
+			}
+			setCookie("language", newValue, 30);
+			console.log(getCookie("language"));
+		  }
+		});
 	}
 )
 

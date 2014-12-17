@@ -108,25 +108,34 @@ angular.module('chatApp.home', ['ngRoute', 'services'])
 		
 		
 		
-		  $scope.languages = [
-			{name:'Français'},
-			{name:'English'}
-		  ];
-		  
-		setCookie("language", $scope.languages[0].name, 30);
+		$scope.languages = ['Français',
+		  'English'];
+		
 		
 		var languageValue = getCookie("language");		
 		  
-		  if (languageValue){
+		if (languageValue){
 		  
 			$scope.language = languageValue;
 			console.log(languageValue);
-			
-			}else{	  
+			console.log($scope.language);
+		}else{	  
 			
 			$scope.language = $scope.languages[0]; // Default the language to french
+			setCookie("language", $scope.language, 30);
 			
+		}
+		
+		$scope.$watch('language', function(newValue, oldValue) {
+		  if ( newValue !== oldValue ) {
+		  
+		    if(getCookie("language")){
+				deleteCookie("language");
 			}
+			setCookie("language", newValue, 30);
+			console.log(getCookie("language"));
+		  }
+		});
 	}
 )
 
