@@ -33,8 +33,8 @@
 	<target name="tools-parallel" description="Run tools in parallel">
 		<parallel>
 			<sequential>
-				<antcall traget="phpdepend"/>
-				<antcall traget="phpmd-ci"/>
+				<antcall target="phpdepend"/>
+				<antcall target="phpmd-ci"/>
 			</sequential>
 				<antcall target="phpcpd-ci"/>
 				<antcall target="phpcs-ci"/>
@@ -61,7 +61,8 @@
 <target name="phploc-ci"
 		depends="prepare"
 		description="Measure project size using PHPLOC and log result in CSV and XML format. Intended for usage within a continuous integration environment.">
-	<exec executable="php ${toolsdir}/phploc.phar">
+	<exec executable="php">
+		<arg value="${basedir}/tools/phploc.phar"/>
 		<arg value="--count-tests" />
 		<arg value="--log-csv" />
 		<arg path="${basedir}/build/logs/phploc.csv" />
@@ -75,7 +76,8 @@
 <target name="phpdepend"
         depends="prepare"
         description="Calculate software metrics using PHP_Depend and log result in XML format. Intended for usage within a continuous integration environment.">
-	<exec executable="php ${toolsdir}/pdepend.phar">
+	<exec executable="php">
+		<arg value="${basedir}/tools/pdepend.phar"/>
 		<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
 		<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
 		<arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
@@ -86,7 +88,8 @@
 <target name="phpmd-ci"
         depends="prepare"
         description="Perform project mess detection using PHPMD and log result in XML format. Intended for usage within a continuous integration environment.">
-	<exec executable="php ${toolsdir}/phpmd.phar">
+	<exec executable="php">
+		<arg value="${basedir}/tools/phpmd.phar"/>
 		<arg path="${basedir}/php" />
 		<arg value="xml" />
 		<arg path="${basedir}/build/phpmd.xml" />
@@ -98,7 +101,8 @@
 <target name="phpcs-ci"
         depends="prepare"
         description="Find coding standard violations using PHP_CodeSniffer and log result in XML format. Intended for usage within a continuous integration environment.">
-	<exec executable="php ${toolsdir}/phpcs.phar" output="/dev/null">
+	<exec executable="php" output="/dev/null">
+		<arg value="${basedir}/tools/phpcs.phar"/>
 		<arg value="--report=checkstyle" />
 		<arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
 		<arg value="--standard=PSR2" />
@@ -111,7 +115,8 @@
 <target name="phpcpd-ci"
         depends="prepare"
         description="Find duplicate code using PHPCPD and log result in XML format. Intended for usage within a continuous integration environment.">
-	<exec executable="php ${basedir}/tools/phpcpd.phar">
+	<exec executable="php">
+		<arg value="${basedir}/tools/phpcpd.phar"/>
 		<arg value="--log-pmd" />
 		<arg path="${basedir}/build/logs/pmd-cpd.xml" />
 		<arg path="${basedir}/php" />
@@ -121,7 +126,8 @@
 <target name="phpunit"
         depends="prepare"
         description="Run unit tests with PHPUnit">
-	<exec executable="php ${toolsdir}/phpunit.phar" failonerror="true">
+	<exec executable="php" failonerror="true">
+		<arg value="${basedir}/tools/phpunit.phar"/>
 		<arg value="--configuration"/>
 		<arg path="${basedir}/build/phpunit.xml"/>
 	</exec>
@@ -130,7 +136,9 @@
 <target name="phpdox"
         depends="phploc-ci,phpcs-ci,phpmd-ci"
         description="Generate project documentation using phpDox">
-	<exec executable="php ${toolsdir}/phpdox.phar" dir="${basedir}/build"/>
+	<exec executable="php" dir="${basedir}/build">
+		<arg value="${basedir}/tools/phpdox.phar"/>
+	</exec>
 </target>
 
 </project>
