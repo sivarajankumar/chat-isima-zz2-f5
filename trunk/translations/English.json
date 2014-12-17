@@ -4,5 +4,7 @@
     "LOG_OUT" : "Log out",
 	"CONNECT" : "Log in",
 	"STAY" : "Stay logged in",
-	"POWERED" : "Powered by AngularJS"
+	"POWERED" : "Powered by AngularJS",
+	"ERROR_NICKNAME_REQUIRED" : "Enter your username",
+	"ERROR_NICKNAME_PATTERN" : "Invalid character. Authorized alphanumeric characters"
 }
