@@ -33,9 +33,14 @@
 	float:left;
 }
 
+#languageSelection{
+	float: right;
+}
+
 #languageSelect{
 	margin-top:30px;
 	margin-right:25px;
+	width: 80px;
 	float: right;
 }
 
