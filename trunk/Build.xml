@@ -34,10 +34,8 @@
 		<parallel>
 			<sequential>
 				<antcall target="phpdepend"/>
-				<antcall target="phpmd-ci"/>
 			</sequential>
 				<antcall target="phpcpd-ci"/>
-				<antcall target="phpcs-ci"/>
 				<antcall target="phploc-ci"/>
 		</parallel>
 	</target>
@@ -81,33 +79,6 @@
 		<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
 		<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
 		<arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
-		<arg path="${basedir}/php" />
-	</exec>
-</target>
-
-<target name="phpmd-ci"
-        depends="prepare"
-        description="Perform project mess detection using PHPMD and log result in XML format. Intended for usage within a continuous integration environment.">
-	<exec executable="php">
-		<arg value="${basedir}/tools/phpmd.phar"/>
-		<arg path="${basedir}/php" />
-		<arg value="xml" />
-		<arg path="${basedir}/build/phpmd.xml" />
-		<arg value="--reportfile" />
-		<arg path="${basedir}/build/logs/pmd.xml" />
-	</exec>
-</target>
-
-<target name="phpcs-ci"
-        depends="prepare"
-        description="Find coding standard violations using PHP_CodeSniffer and log result in XML format. Intended for usage within a continuous integration environment.">
-	<exec executable="php" output="/dev/null">
-		<arg value="${basedir}/tools/phpcs.phar"/>
-		<arg value="--report=checkstyle" />
-		<arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-		<arg value="--standard=PSR2" />
-		<arg value="--extensions=php" />
-		<arg value="--ignore=autoload.php" />
 		<arg path="${basedir}/php" />
 	</exec>
 </target>
