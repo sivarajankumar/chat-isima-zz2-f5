@@ -60,6 +60,8 @@ angular.module('chatApp.home', ['ngRoute', 'services', 'translateModule', 'ngSan
 		
 		function displayUsers(data, status)
 		{
+			$( "#errorUsers" ).html( data );
+			console.log("Users" + data);
 			$scope.users = data;
 		}
 

@@ -7,13 +7,13 @@ class UsersManager
 	public function __construct($fileName)
 	{
 		$this->fileName = $fileName;
+		
+		// Définit le fuseau horaire par défaut à utiliser.
+		date_default_timezone_set('UTC');
 	}
 	
 	public function addUsers($nickname, $password)
-	{
-		// Définit le fuseau horaire par défaut à utiliser.
-		date_default_timezone_set('UTC');
-	
+	{	
 		if( ! file_exists($this->fileName) )
 		{
 			// Create or read file $fileName
@@ -98,6 +98,30 @@ class UsersManager
 		return false;
 	}
 	
+	public function updateTimespan($nickname)
+	{
+		if( file_exists($this->fileName) )
+		{
+			$json = json_decode(file_get_contents($this->fileName));
+			
+			foreach( $json->users as $item )
+			{
+				if( $item->nickname == $nickname )
+				{
+					$item->date = date("Y-m-d H:i:s");
+				}
+				else
+				{
+					if( $item->password == false )
+					{
+						
+					}
+				}
+			}
+		}
+		file_put_contents($this->fileName, json_encode($json));
+	}
+	
 	public function getAllUsers()
 	{
 		$usersName = array();
@@ -108,7 +132,14 @@ class UsersManager
 	
 			foreach( $json->users as $item )
 			{
-				array_push($usersName, $item->nickname);
+				$date		= new DateTime( $item->date );
+				$date->modify('+10 minutes');
+				$dateToEnd	= $date->format("YmdHis");
+				$currentDate = new DateTime( date("YmdHis") );
+				$currentDate = $currentDate->format("YmdHis");
+			
+				if( $currentDate <= $dateToEnd )
+					array_push($usersName, $item->nickname);
 			}
 		}
 	
