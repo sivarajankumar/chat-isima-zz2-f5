@@ -5,7 +5,7 @@
          verbose="true">
        
 	<testsuites>
-		<testsuite name="ProjectName">
+		<testsuite name="ChatIsima">
 			<directory>../tests/php</directory>
 		</testsuite>
 	</testsuites>

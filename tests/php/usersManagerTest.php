@@ -3,7 +3,7 @@
 require_once '/../../php/usersManager.php';
 
 
-class UsersManagerTests extends PHPUnit_Framework_TestCase
+class UsersManagerTest extends PHPUnit_Framework_TestCase
 {	
 	protected $usersManager;
 	
