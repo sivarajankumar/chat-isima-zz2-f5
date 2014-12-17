@@ -92,7 +92,7 @@ angular.module('chatApp.home', ['ngRoute', 'services', 'translateModule', 'ngSan
 		
 		// mise à jour de l'affichage
 		usersTimer = setInterval(usersOnline, 10000);
-		messagesTimer = setInterval(getMessages, 5000);
+		messagesTimer = setInterval(getMessages, 2000);
 		
 		function sendCallback(data, status)
 		{

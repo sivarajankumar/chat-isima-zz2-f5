@@ -1,19 +1,16 @@
-﻿<div id="errorUsers">Error</div>
-﻿<div id="error"></div>
-
-<div id="bandeau">
+﻿<div id="bandeau">
 	<h1 id="chatTitle">Chat Isima</h1>
 	<select id="languageSelect" ng-model="language" ng-options="l for l in languages"></select>
 	<button id="deconnectButton" ng-click="disconnect()" ng-bind-html="translation.LOG_OUT"></button>
 </div>
 
 <div id="usersPart" class="col-md-4">
-	<div id="usersList" class="panel panel-primary">
+	<div id="usersPanel" class="panel panel-primary">
 		<div class="panel-heading">
 			<span ng-bind-html="translation.CONNECTED_USERS"></span> :
 		</div>
 		
-		<div class="panel-body">
+		<div id ="userListPanel" class="panel-body">
 			<ul class="usersList" ng-repeat="user in users">
 				<li>{{ user }}</li>
 			</ul>
