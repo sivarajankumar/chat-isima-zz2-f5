@@ -2,7 +2,7 @@
 <phpdox xmlns="http://phpdox.net/config">
 	<project name="Chat Isima" source="../php" workdir="../build/phpdoc">
 		<collector backend="parser" />
-			<generator output="../build/api">
+			<generator output="../build/phpdox">
 			<build engine="html" output="html"/>
 		</generator>
 	</project>
