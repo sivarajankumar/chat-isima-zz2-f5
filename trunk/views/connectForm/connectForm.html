@@ -1,6 +1,6 @@
-<div class="row">
+﻿<div class="row">
 	<div id="languageSelection">
-		langue:
+		{{translation.LANGUAGE}} :
 		<select id="languageSelect" ng-model="language" ng-options="l for l in languages"></select>
 	</div>
 	<div id="welcomePart" class="row col-md-6 col-md-offset-2">
@@ -16,7 +16,7 @@
 		
 		<form name="connectForm">
 			
-				<div class="blueTitle">Se connecter</div>
+				<div class="blueTitle">{{translation.CONNECT}}</div>
 				<div id="errorForm" class="errorField"></div>
 				
 				<div>
@@ -29,7 +29,7 @@
 				<div>
 					<div class="leftPart" id="connectFormCheckbox">
 						<input type="checkbox" ng-model="connectFormData.rememberMe">
-						<span>Rester connecté</span>
+						<span ng-bind-html="translation.STAY"></span>
 					</div>
 					
 					<button ng-click="connect()" ng-disabled="connectForm.$invalid">Se connecter</button>
