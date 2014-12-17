@@ -23,7 +23,10 @@
 					<span class="errorField" ng-show="connectForm.nickname.$error.required && !connectForm.nickname.$pristine">
 						Saisissez votre pseudo
 					</span>
-					<input type="text" id="nicknameInput" name="nickname" ng-model="connectFormData.nickname" placeholder="pseudo" required>
+					<span class="errorField" ng-show="connectForm.nickname.$error.pattern">
+						Caractére invalide. Caractéres alphanumérique autorisé.
+					</span>
+					<input type="text" id="nicknameInput" name="nickname" ng-model="connectFormData.nickname" ng-pattern="/^[a-zA-Z0-9]*$/" placeholder="pseudo" required>
 				</div>
 				
 				<div>
