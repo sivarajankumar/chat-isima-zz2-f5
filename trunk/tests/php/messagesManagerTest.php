@@ -3,7 +3,7 @@
 require_once '/../../php/messagesManager.php';
 
 
-class messagesManagerTests extends PHPUnit_Framework_TestCase
+class messagesManagerTest extends PHPUnit_Framework_TestCase
 {	
 	protected $messagesManager;
 	
