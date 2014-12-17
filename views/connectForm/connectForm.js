@@ -96,7 +96,7 @@ angular.module('chatApp.connectForm', ['ngRoute', 'services', 'translateModule',
 		
 		$scope.languages = ['Français', 'English'];
 		
-		var languageValue = getCookie("language");		
+		var languageValue = getCookie("language");
 		  
 		if (languageValue){
 			$scope.language = languageValue;
