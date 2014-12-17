@@ -109,6 +109,8 @@
         description="Generate project documentation using phpDox">
 	<exec executable="php" dir="${basedir}/build">
 		<arg value="${basedir}/tools/phpdox.phar"/>
+		<arg value="--file"/>
+		<arg value="${basedir}/tools/phpdox.xml"/>
 	</exec>
 </target>
 
