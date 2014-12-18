@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('chatApp.home', ['ngRoute', 'services', 'translateModule', 'ngSanitize'])
+angular.module('chatApp.home', ['ngRoute', 'services', 'translateModule', 'ngSanitize', 'textAngular'])
 
 .config
 (
