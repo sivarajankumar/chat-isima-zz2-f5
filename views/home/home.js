@@ -110,7 +110,7 @@ angular.module('chatApp.home', ['ngRoute', 'services', 'translateModule', 'ngSan
 		
 		
 		
-		$scope.languages = ['Français',
+		$scope.languages = ['Francais',
 		  'English'];
 		
 		
