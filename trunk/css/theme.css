@@ -63,44 +63,65 @@
 
 #userListPanel{
 	height: 100%;
-	max-height: 500px;
+	max-height: 450px;
 	overflow: auto;
 }
 
 #usersPart{
-	margin-top: 2%;
+	margin-top: 1%;
 	min-height: 400px;
 	float: right;
 }
 
 #messagesPart{
-	margin-top: 2%;
+	margin-top: 1%;
 	border-radius: 0.25em;
 }
 
 #messagesPanel{
 	word-wrap: break-word;
+	margin-bottom: 0;
 }
 
 #messagesList{
 	height: 100%;
-	max-height: 500px;
+	max-height: 450px;
 	overflow: auto;
 }
 
 #sendMessages{
-	margin-top: 2%;
+	margin-top: 1.5%;
 	height:100px;
 	border-radius: 0.25em;
 }
 
 #sendButton{
-	margin-left: 50px;
-	margin-top:-100px;
+	margin-left: 420px;
+	margin-top:-188px;
 	vertical-align: middle;
 }
 
-h1
+#message{
+	height:100px;
+}
+
+.ta-editor {
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    margin:10px 0;
+}
+.ta-scroll-window.form-control{
+	height:120px;
+	min-height:120px;
+}
+.ta-scroll-window > .ta-bind{
+	min-height:115px;
+}
+
+#connectFormTitle
 {
 	color: #800000;
 }

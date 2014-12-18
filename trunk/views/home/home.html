@@ -23,7 +23,7 @@
 		<div class="panel-heading"> Messages :</div>
 		<div id="messagesList" class="panel-body">
 			<ul ng-repeat="msg in messageData" style="list-style-type:none">
-				<li>{{ msg.message }}</li>
+				<li ng-bind-html="msg.message"></li>
 				<li><small class="text-muted">{{ msg.owner }} | {{ msg.date }}</small></li>
 			</ul>
 		</div>
@@ -33,7 +33,7 @@
 <div id="sendingPart" class="col-md-8">
 	<form ng-submit="sendMessage()">
 		<div id="sendMessages">
-			<textarea rows="4" cols="100" id="message" placeholder="votre message" ng-model="formData.message"></textarea>
+			<div ta-toolbar="[['h1','h2','h3','pre', 'quote'],['bold','italics','underline','redo', 'undo']]" id="message" placeholder="votre message" text-angular ng-model="formData.message"></div>
 			<button id="sendButton" type="submit">{{translation.SEND}} </button>
 		</div>
 	</form>
