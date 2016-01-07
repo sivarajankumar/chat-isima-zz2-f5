@@ -1,0 +1,1 @@
+Creation of instant chat for a web project at ISIMA. Using PHP for the server code, AngularJs to manage the different web pages and Ajax for the interaction between the client and the server.
